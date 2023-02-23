@@ -142,6 +142,5 @@ def main():
 	print "\t Loadable Kernel Modules "
 	kernelModulesCheck()
 
-
 if __name__ == "__main__":
 	main()
