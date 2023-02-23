@@ -68,6 +68,18 @@ def boardvendorCheck():
     if (flag == 0):
         printVal(1)         
         
+def modaliasCheck():
+    modalias = open("/sys/class/dmi/id/modalias").read()
+    lists = {"VMware", "Phoenix", "innotek", "Oracle"}
+    flag = 0
+    
+    for i in lists:
+        if (board_vendor.find(i) != -1):
+            print '\t\t \033[1;31m'+i+' Detected!\033[1;m'
+            flag = 1
+    if (flag == 0):
+        printVal(1) 	
+	
 def productnameCheck():
     product_name = open("/sys/class/dmi/id/product_name").read()
     lists = {"VMware", "Phoenix", "innotek"}
@@ -132,6 +144,9 @@ def main():
 
 	print "\t Board Vendor "
 	boardvendorCheck()
+	
+	print "\t Modalias "
+	modaliasCheck()
     
 	print "\t Product Name "
 	productnameCheck()
