@@ -105,14 +105,14 @@ def kernelModulesCheck():
         printVal(1)       
         
 def main():
-    print "STARTING DIAGNOSIS"
-    print "\n"
-    print "  Distribution : ", open("/proc/sys/kernel/ostype").read()
-    print "  OS: ", open("/etc/lsb-release").read()[85:103]
-    print "  Kernel Version :", open("/proc/sys/kernel/osrelease").read()
-    print "  Host name: ",open("/proc/sys/kernel/hostname").read()
+   	print "STARTING DIAGNOSIS"
+   	print "\n"
+   	print "  Distribution : ", open("/proc/sys/kernel/ostype").read()
+	print "  OS: ", open("/etc/lsb-release").read()[85:103]
+   	print "  Kernel Version :", open("/proc/sys/kernel/osrelease").read()
+   	print "  Host name: ",open("/proc/sys/kernel/hostname").read()
     
-    print "  Presence of Virtual Machine: "
+   	print "  Presence of Virtual Machine: "
 	VMDirCheck()
 	print "\n"
 	
