@@ -36,7 +36,7 @@ def macCheck():
     mac = ':'.join(("%012X" % uuid.getnode())[i:i+2] for i in range(0, 12, 2))
     macc = mac[0:8]
         
-    for i in VMvac:
+    for i in VMmac:
         if (i == macc):
             print "\t\t \033[1;31mVMWare Detected! MAC Address : '+mac+'\033[1;m"
             flag = 1
