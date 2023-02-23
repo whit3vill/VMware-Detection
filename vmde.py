@@ -8,7 +8,7 @@ def printVal(val):
 		print '\t\t \033[1;32mPASS\033[1;m'
 		
 def VMDirCheck():
-	list_dir = os.listdir
+	list_dir = os.listdir("/usr/bin/")
 	vmdir = "vmware-"
 	if (any(vmdir in s for s in list_dir) == True):
 		print '\t\t \033[1;31m'+vmdir+' Detected!\033[1;m'
@@ -22,7 +22,7 @@ def flagCheck():
 		printVal(1)
 		
 def scsiCheck():
-	list_dir = open("proc/scsi/scsi").read().split(" ")
+	list_dir = open("/proc/scsi/scsi").read().split(" ")
 	vmdir = "VMware"
 	if (any(vmdir in s for s in list_dir) == True):
 		print '\t\t \033[1;31m'+vmdir+' Detected!\033[1;m'
@@ -31,18 +31,18 @@ def scsiCheck():
 		
 def macCheck():
 	VMmac=['00:05:69','00:0c:29','00:0C:29','00:1C:14','00:1c:14','00:50:56']
-    flag = 0
+	flag = 0
     
-    mac = ':'.join(("%012X" % uuid.getnode())[i:i+2] for i in range(0, 12, 2))
-    macc = mac[0:8]
+	mac = ':'.join(("%012X" % uuid.getnode())[i:i+2] for i in range(0, 12, 2))
+	macc = mac[0:8]
         
-    for i in VMmac:
-        if (i == macc):
-            print "\t\t \033[1;31mVMWare Detected! MAC Address : '+mac+'\033[1;m"
-            flag = 1
+	for i in VMmac:
+		if (i == macc):
+			print '\t\t \033[1;31mVMWare Detected! MAC Address : '+mac+'\033[1;m'
+			flag = 1
     
-    if (flag == 0):
-        printVal(1)
+	if (flag == 0):
+		printVal(1)
 		
 def biosvendorCheck():
     bios_vendor = open("/sys/class/dmi/id/bios_vendor").read()
