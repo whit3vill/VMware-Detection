@@ -1,4 +1,4 @@
-python2 vmde.py
+python vmde3.py
 gcc vmde.c -o vmde
 
 ./vmde
