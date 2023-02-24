@@ -68,7 +68,7 @@ def modaliasCheck():
 	lists = {"VMware", "Phoenix", "innotek", "Oracle"}    
 	flag = 0        
 	for i in lists:        
-		if (board_vendor.find(i) != -1):            
+		if (modalias.find(i) != -1):            
 			print('\t\t \033[1;31m'+i+' Detected!\033[1;m')            
 			flag = 1    
 	if (flag == 0):        
