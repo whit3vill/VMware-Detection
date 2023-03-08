@@ -11,49 +11,37 @@
 #define VMWARE_PORT_CMD_GETVERSION      10 
 #define UINT_MAX 0xFFFFFFFF 
 
-int print(int a)
-{
-	if(a>0)
-	 {
-	 	
-     	printf("\t\t \033[1;31mDetected! \n");
-     	printf("\033[0m");
-	 }
-	 else
-	 {
-	 	printf("\033[1;32m");
-	 	printf("\t\t PASS \n");
-	 	printf("\033[0m");
-	 }
+int print(int a) {
+	if(a>0) {
+		printf("\t\t \033[1;31mDetected! \n");
+		printf("\033[0m");
+	}
+	else {
+		printf("\033[1;32m");
+		printf("\t\t PASS \n");
+		printf("\033[0m");
+	}
 	return 0;
 }
-void sprint(char *name)
-{
-		printf("\t\t \033[1;31m%s Detected! \n",name);
-     	printf("\033[0m");
-
+void sprint(char *name) {
+	printf("\t\t \033[1;31m%s Detected! \n",name);
+	printf("\033[0m");
 }
 
-void handler(int signal)
-{
-  print(0);
-  exit(0);    
+void handler(int signal) {
+	print(0);
+	exit(0);    
 }
 
-
-int hv_bit()
-{
-
+int hv_bit() {
 	int ecx=0;
 	__asm__ volatile("cpuid" \
 			: "=c"(ecx) \
 			: "a"(0x01));
-   return (ecx >> 31) & 0x1;
-   
+	return (ecx >> 31) & 0x1;
 }
 
-int hv_vendor()
-{
+int hv_vendor() {
 	int i=0;
 	char vendor[13];
 	char *strings[2]={"VMwareVMware","KVMKVMKVM"};
@@ -61,19 +49,15 @@ int hv_vendor()
 	__asm__ volatile("cpuid" \
 			: "=b"(ebx),"=c"(ecx),"=d"(edx) \
 			: "a"(0x40000000));
-   	sprintf(vendor  , "%c%c%c%c", ebx, (ebx >> 8), (ebx >> 16), (ebx >> 24));
+	sprintf(vendor  , "%c%c%c%c", ebx, (ebx >> 8), (ebx >> 16), (ebx >> 24));
 	sprintf(vendor+4, "%c%c%c%c", ecx, (ecx >> 8), (ecx >> 16), (ecx >> 24));
 	sprintf(vendor+8, "%c%c%c%c", edx, (edx >> 8), (edx >> 16), (edx >> 24));
 	vendor[12] = 0x00;
-	for(i=0;i<2;i++)
-	{
+	for(i=0;i<2;i++) {
 		if(strcmp(strings[i],vendor)==0)
 			return 1;
-			
 	}
-	
 	return 0;
-   
 }
 
 
@@ -90,9 +74,7 @@ int rdtsc_diff() {
 	return ret2 - ret;
 }
 
-int vmexit_cpuid()
-{
-
+int vmexit_cpuid() {
 	int avg=0,sum=0,sub,i;
 	for (i = 0; i < 10; i++) {
 		sub = rdtsc_diff();
@@ -101,15 +83,13 @@ int vmexit_cpuid()
 	}
 	avg=sum/10;
 	
-	if(avg>0 && avg<750)
-	{
+	if(avg>0 && avg<750) {
 		return 0;
 	}
 	return 1;
 }
 
-void in()
-{
+void in() {
 	int eax=0,ebx=0,ecx=0,edx=0;
 	
 	signal(SIGSEGV, handler);
@@ -119,16 +99,12 @@ void in()
 			: "a"(VMWARE_HYPERVISOR_MAGIC),	"c" ( VMWARE_PORT_CMD_GETVERSION),"d"(VMWARE_HYPERVISOR_PORT), "b"(UINT_MAX)
 			);
 	
-	if(ebx==0x564D5868)
-	{
+	if(ebx==0x564D5868) {
 		sprint("VMware");
-	}
-	
-		
+	}		
 } 
-int main()
-{
-	
+
+int main() {
 	int i,a;
 	a=hv_bit();
 	printf("\t Hypervisor bit from CPUID instruction \n");
@@ -146,5 +122,4 @@ int main()
 	in();
 	
 	return 0;  
-
 }
