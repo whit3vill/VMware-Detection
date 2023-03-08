@@ -116,28 +116,58 @@ def main():
 	print("  Host name: ",open("/proc/sys/kernel/hostname").read())
 	
 	print("  Presence of Virtual Machine: ")	
-	VMDirCheck()	
+	try:
+		VMDirCheck()	
+	except:
+		printVal(1)
 	print("\n")		
 	
 	print("Checking VM Elements")		
 	print("\t Hypervisor Flag")	
-	flagCheck()		
+	try:
+		flagCheck()		
+	except:
+		printVal(1)
 	print("\t SCSI ")	
-	scsiCheck()		
+	try:
+		scsiCheck()		
+	except:
+		printVal(1)	
 	print("\t MAC Address ")	
-	macCheck()		
+	try:
+		macCheck()		
+	except:
+		printVal(1)
 	print("\t Bios Vendor ")	
-	biosvendorCheck()	
+	try:
+		biosvendorCheck()	
+	except:
+		printVal(1)
 	print("\t Board Vendor ")	
-	boardvendorCheck()		
+	try:
+		boardvendorCheck()		
+	except:
+		printVal(1)
 	print("\t Modalias ")	
-	modaliasCheck()    	
+	try:
+		modaliasCheck()    	
+	except:
+		printVal(1)
 	print("\t Product Name ")	
-	productnameCheck()		
+	try:
+		productnameCheck()		
+	except:
+		printVal(1)
 	print("\t System Vendor ")	
-	sysvendorCheck()		
+	try:
+		sysvendorCheck()		
+	except:
+		printVal(1)
 	print("\t Loadable Kernel Modules ")	
-	kernelModulesCheck()
+	try:
+		kernelModulesCheck()
+	except:
+		printVal(1)
 	
 if __name__ == "__main__":	
 	main()	
