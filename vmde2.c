@@ -7,7 +7,6 @@ int vm_score = 0;
 
 void number_of_cores();
 void run_command();
-void registry_check();
 
 int main(int argc, const char * argv[]) {
     /*run number_of_cores() function first, 
