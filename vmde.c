@@ -104,22 +104,36 @@ void in() {
 	}		
 } 
 
+void number_of_cores() {
+	int processors = 0;
+	processors = (int)sysconf(_SC_NPROCESSORS_ONLN);
+	
+	if (processors <= 1) {
+		return 1;
+	}
+	return 0;
+}
+
 int main() {
 	int i,a;
 	a=hv_bit();
 	printf("\t Hypervisor bit from CPUID instruction \n");
 	print(a);
 	
-	printf("\t VMEXIT through CPUID instruction \n");
-	a=vmexit_cpuid();
-	print(a);
+	//printf("\t VMEXIT through CPUID instruction \n");
+	//a=vmexit_cpuid();
+	//print(a);
 	
 	a=hv_vendor();
 	printf("\t Virtualization vendor string from CPUID instruction \n");
 	print(a);
 	
-	printf("\t IN instruction \n");
-	in();
+	//printf("\t IN instruction \n");
+	//in();
+	
+	printf("\t Number of CPU Cores \n");
+	a = number_of_cores();
+	print(a);
 	
 	return 0;  
 }
