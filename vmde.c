@@ -104,7 +104,7 @@ void in() {
 	}		
 } 
 
-void number_of_cores() {
+int number_of_cores() {
 	int processors = 0;
 	processors = (int)sysconf(_SC_NPROCESSORS_ONLN);
 	
